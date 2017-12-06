@@ -647,7 +647,23 @@ angular.module('textAngularSetup', [])
         iconclass: 'fa fa-indent',
         tooltiptext: taTranslations.indent.tooltip,
         action: function(){
-            return this.$editor().wrapSelection("indent", null);
+            var indent = angular.element(window.getSelection().focusNode);
+            if (indent.is("li")) {
+                return this.$editor().wrapSelection("indent", null);
+            } else if (indent.hasClass("ta-indent-1")) {
+                indent.toggleClass("ta-indent-1");
+                return indent.toggleClass("ta-indent-2");
+            } else if (indent.hasClass("ta-indent-2")) {
+                indent.toggleClass("ta-indent-2");
+                return indent.toggleClass("ta-indent-3");
+            } else if (indent.hasClass("ta-indent-3")) {
+                indent.toggleClass("ta-indent-3");
+                return indent.toggleClass("ta-indent-4");
+            } else if (indent.hasClass("ta-indent-4")) {
+                return true;
+            } else {
+                return indent.toggleClass("ta-indent-1");
+            }
         },
         activeState: function(){
             return this.$editor().queryFormatBlockState('blockquote');
@@ -658,7 +674,23 @@ angular.module('textAngularSetup', [])
         iconclass: 'fa fa-outdent',
         tooltiptext: taTranslations.outdent.tooltip,
         action: function(){
-            return this.$editor().wrapSelection("outdent", null);
+            var outdent = angular.element(window.getSelection().focusNode);
+            if (outdent.is("li")) {
+                return this.$editor().wrapSelection("outdent", null);
+            } else if (outdent.hasClass("ta-indent-1")) {
+                return outdent.toggleClass("ta-indent-1");
+            } else if (outdent.hasClass("ta-indent-2")) {
+                outdent.toggleClass("ta-indent-2");
+                return outdent.toggleClass("ta-indent-1");
+            } else if (outdent.hasClass("ta-indent-3")) {
+                outdent.toggleClass("ta-indent-3");
+                return outdent.toggleClass("ta-indent-2");
+            } else if (outdent.hasClass("ta-indent-4")) {
+                outdent.toggleClass("ta-indent-4");
+                return outdent.toggleClass("ta-indent-3");
+            } else {
+                return true;
+            }
         },
         activeState: function(){
             return false;

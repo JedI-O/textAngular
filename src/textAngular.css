@@ -191,3 +191,15 @@
     border-top-width: 0;
     border-bottom-color: #fff;
 }
+.ta-indent-1 {
+    margin-left: 40px !important;
+}
+.ta-indent-2 {
+    margin-left: 80px !important;
+}
+.ta-indent-3 {
+    margin-left: 120px !important;
+}
+.ta-indent-4 {
+    margin-left: 160px !important;
+}
